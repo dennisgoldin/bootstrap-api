@@ -1,0 +1,71 @@
+#map1, #map2, #map3, .current-weather {
+  margin: 25px auto;
+  height: 250px;
+  width: 300px;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+}
+
+/* override vertical position */
+.h3-pos {
+  margin-top: -10px;
+}
+
+.caption {
+  margin-left: 15px;
+}
+
+p {
+  margin-right: 10px;
+}
+
+.nav-pos{
+  margin: 10px 25px 0px 25px;
+}
+
+.weather-title {
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #DDD;
+}
+
+.weather-label {
+  margin-left: 65px;
+}
+
+.weather-data {
+  font-weight: lighter;
+}
+
+.weather-label, .weather-data {
+  width: 120px;
+  height: 1.4em;
+  font-size: 0.7em;
+  /*border: 1px dashed black;*/
+}
+
+.weatherDesc {
+  text-transform: capitalize;
+}
+
+.footer-style {
+  color: #FFF;
+  text-align: center;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+#empty-tn-1 {
+  margin-left: 15px;
+  width: 360px;
+}
+
+#emtpy-tn-2 {
+  margin-left: 5px;
+  width: 360px;
+}
+
+#emtpy-tn-3 {
+  margin-left: -5px;
+  width: 360px;
+}

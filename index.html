@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- had to move jQuery to top of page for Bootstrap to work -->
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- ajax -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.5.1/lodash.js"></script>
+    <!-- <link type="text/css" rel="stylesheet" href="http://meyerweb.com/eric/tools/css/reset/reset.css"> -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" type="text/css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <!-- my stylesheet -->
+    <link type="text/css" rel="stylesheet" href="./assets/css/styles.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Google Maps API -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAsegdUcdjTbp-69-W4bo9DG31tt-p28tI" async defer></script>
+    <title>Bootstrap + APIs</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- default nav bar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Trippin Out</a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Dashboard<span class="sr-only">(current)</span></a></li>
+              <li><a href="#">Tickets</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Travel Type <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-success">Find It</button>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="#">About Us</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Customer Support <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+      <!-- jumbotron -->
+      <div class="jumbotron">
+        <h1>Trippin Out</h1>
+        <p>My favorite destinations...</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+      </div>
+      <!-- thumbnails row 1 -->
+      <div class="row">
+        <!-- thumbnail 1 -->
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <!-- tabs -->
+            <ul class="nav nav-tabs nav-pos" role="tablist1">
+              <li role="presentation1" class="active clickEvent"><a href="#googleMap1" aria-controls="home" role="tab1" data-toggle="tab">Map</a></li>
+              <li role="presentation1" class="clickEvent"><a href="#currentWeather1" aria-controls="home" role="tab1" data-toggle="tab">Current Weather</a></li>
+            </ul>
+            <!-- tab content -->
+            <div class="tab-content">
+              <div role="tabpanel1" class="tab-pane fade in active" id="googleMap1">
+                <!-- Google Map API -->
+                <div id="map1"></div>
+              </div>
+              <div role="tabpanel1" class="tab-pane fade current-weather" id="currentWeather1">
+                <h3 class="weather-title">Current Weather<h3>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Day Temp:</div>
+                  <div class="col-md-6 weather-data dayTemp" id="">Data</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Max Temp:</div>
+                  <div class="col-md-6 weather-data maxTemp" id="">Data</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Min Temp:</div>
+                  <div class="col-md-6 weather-data minTemp" id="">Data</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Pressure:</div>
+                  <div class="col-md-6 weather-data pressure" id="">Data</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Humidity:</div>
+                  <div class="col-md-6 weather-data humidity" id="">Data</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Type:</div>
+                  <div class="col-md-6 weather-data weatherType" id="">Data</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Description:</div>
+                  <div class="col-md-6 weather-data weatherDesc" id="">Data</div>
+                </div>
+              </div>
+            </div>
+            <div class="caption">
+              <h3 class="h3-pos">Durham, NC</h3>
+              <p>You are beaten. It is useless to resist. Don't let yourself be destroyed as Obi-Wan did. There is no escape. Don't make me destroy you. You do not yet realize your importance. You have only begun to discover you power. Join me and I will complete your training. With our combined strength, we can end this destructive conflict and bring order to the galaxy. I'll never join you! If you only knew the power of the dark side.</p>
+              <p><a href="#" class="btn btn-primary" role="button">Edit</a> &nbsp; &nbsp;
+                 <a href="#" class="btn btn-danger" role="button">Remove</a></p>
+            </div>
+          </div>
+        </div>
+        <!-- thumbnails row 1 -->
+        <div class="col-sm-6 col-md-4">
+          <!-- thumbnail 2 -->
+          <div class="thumbnail">
+            <!-- tabs -->
+            <ul class="nav nav-tabs nav-pos" role="tablist2">
+              <li role="presentation2" class="active clickEvent"><a href="#googleMap2" aria-controls="home" role="tab2" data-toggle="tab">Map</a></li>
+              <li role="presentation2" class="clickEvent"><a href="#currentWeather2" aria-controls="home" role="tab2" data-toggle="tab">Current Weather</a></li>
+            </ul>
+            <!-- tab content -->
+            <div class="tab-content">
+              <div role="tabpanel2" class="tab-pane fade in active" id="googleMap2">
+                <!-- Google Map API -->
+                <div id="map2"></div>
+              </div>
+              <div role="tabpanel2" class="tab-pane fade current-weather" id="currentWeather2">
+                <h3 class="weather-title">Current Weather<h3>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Day Temp:</div>
+                  <div class="col-md-6 weather-data dayTemp" id="">Data</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Max Temp:</div>
+                  <div class="col-md-6 weather-data maxTemp" id="">Data</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Min Temp:</div>
+                  <div class="col-md-6 weather-data minTemp" id="">Data</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Pressure:</div>
+                  <div class="col-md-6 weather-data pressure" id="">Data</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Humidity:</div>
+                  <div class="col-md-6 weather-data humidity" id="">Data</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Type:</div>
+                  <div class="col-md-6 weather-data weatherType" id="">Data</div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6 weather-label">Description:</div>
+                  <div class="col-md-6 weather-data weatherDesc" id="">Data</div>
+                </div>
+              </div>
+            </div>
+            <div class="caption">
+              <h3 class="h3-pos">Apex, NC</h3>
+              <p>Obi-Wan never told you what happened to your father. He told me enough! He told me you killed him. No. I am your father. No. No. That's not true! That's impossible! Search your feelings. You know it to be true. No! No! No! Luke. You can destroy the Emperor. He has foreseen this. It is your destiny. Join me, and we can rule the galaxy as father and son. Come with me. It's the only way.</p>
+              <p><a href="#" class="btn btn-primary" role="button">Edit</a> &nbsp; &nbsp;
+                 <a href="#" class="btn btn-danger" role="button">Remove</a></p>
+            </div>
+          </div>
+        </div>
+      <!-- thumbnails row 1 -->
+      <div class="col-sm-6 col-md-4">
+        <!-- thumbnail 3 -->
+        <div class="thumbnail">
+          <!-- tabs -->
+          <ul class="nav nav-tabs nav-pos" role="tablist3">
+            <li role="presentation3" class="active clickEvent"><a href="#googleMap3" aria-controls="home" role="tab3" data-toggle="tab">Map</a></li>
+            <li role="presentation3" class="clickEvent"><a href="#currentWeather3" aria-controls="home" role="tab3" data-toggle="tab">Current Weather</a></li>
+          </ul>
+          <!-- tab content -->
+          <div class="tab-content">
+            <div role="tabpanel3" class="tab-pane fade in active" id="googleMap3">
+              <!-- Google Map API -->
+              <div id="map3"></div>
+            </div>
+            <div role="tabpanel3" class="tab-pane fade current-weather" id="currentWeather3">
+              <h3 class="weather-title">Current Weather<h3>
+              <div class="row">
+                <div class="col-md-6 weather-label">Day Temp:</div>
+                <div class="col-md-6 weather-data dayTemp" id="">Data</div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 weather-label">Max Temp:</div>
+                <div class="col-md-6 weather-data maxTemp" id="">Data</div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 weather-label">Min Temp:</div>
+                <div class="col-md-6 weather-data minTemp" id="">Data</div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 weather-label">Pressure:</div>
+                <div class="col-md-6 weather-data pressure" id="">Data</div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 weather-label">Humidity:</div>
+                <div class="col-md-6 weather-data humidity" id="">Data</div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 weather-label">Type:</div>
+                <div class="col-md-6 weather-data weatherType" id="">Data</div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 weather-label">Description:</div>
+                <div class="col-md-6 weather-data weatherDesc" id="">Data</div>
+              </div>
+            </div>
+          </div>
+          <div class="caption">
+            <h3 class="h3-pos">Landstulh, Germany</h3>
+            <p>Seventeen thousand! Those guys must really be desperate. This could really save my neck. Get back to the ship and get her ready. You'll have to sell your speeder. That's okay. I'm never coming back to this planet again. Going somewhere, Solo? Yes, Greedo. As a matter of fact, I was just going to see your boss. Tell Jabba that I've got his money. It's too late. You should have paid him when you had the chance.</p>
+            <p><a href="#" class="btn btn-primary" role="button">Edit</a> &nbsp; &nbsp;
+               <a href="#" class="btn btn-danger" role="button">Remove</a></p>
+          </div>
+        </div>
+      </div>
+      <!-- thumbnails row 2 -->
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail" id="empty-tn-1">
+            <div class="caption">
+              <h3>Thumbnail label</h3>
+              <p>All kinds of content!!!!</p>
+              <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row"> -->
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail" id="emtpy-tn-2">
+            <div class="caption">
+              <h3>Thumbnail label</h3>
+              <p>All kinds of content!!!!</p>
+              <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+            </div>
+          </div>
+        </div>
+      <!-- <div class="row"> -->
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail" id="emtpy-tn-3">
+            <div class="caption">
+              <h3>Thumbnail label</h3>
+              <p>All kinds of content!!!!</p>
+              <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+  <!-- static inverse color footer -->
+  <nav class="navbar navbar-inverse navbar-static-bottom">
+    <div class="container footer-style">
+      Site by dGo
+    </div>
+  </nav>
+  <script src="./assets/js/scripts.js"></script>
+</body>
+</html>
